@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Define the WOA grid (example: 1-degree resolution grid)
 latitudes = np.arange(-89.5, 90.5, 1.0)
-longitudes = np.arange(0.5, 360.5, 1.0)
+longitudes = np.arange(-179.5, 179.5, 1.0)
 
 # Create a new NetCDF file
 ncfile = Dataset('target_grid_woa.nc', 'w', format='NETCDF4_CLASSIC')
