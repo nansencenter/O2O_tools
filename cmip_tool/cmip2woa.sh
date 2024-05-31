@@ -38,9 +38,11 @@ esac
 
 SRCDIR=/nird/datalake/NS9560K/ESGF/CMIP6/CMIP/${INSTITUTE}/${MODEL}/${EXP}/${ENS}/Omon
 DATDIR=$(dirname $PWD)/data/${MODEL}/${EXP}
-target_grid=def_grid_woa.txt
 
 mkdir -p $DATDIR
+
+target_hgrid=def_hgrid_woa.txt
+target_zgrid=def_zgrid_woa.txt
 
 var_list=(dissic o2 no3 thetao so mlotst)
 
@@ -53,7 +55,13 @@ do
     if [ -f $ncfile_in ]; then
        ncfile_out=${DATDIR}/${ncfile%.*}_WOA.nc
        if [ ! -f $ncfile_out ]; then
-          cdo -s remapbil,${target_grid} $ncfile_in $ncfile_out
+          if [ "$var" == "mlotst" ]; then # 2D variables
+             cdo -s remapbil,${target_hgrid} $ncfile_in $ncfile_out        # Horizontal interpolation 
+          else                            # 3D variables
+             cdo -s remapbil,${target_hgrid} $ncfile_in tmp.nc             # Horizontal interpolation
+             cdo -s intlevel,$(cat def_zgrid_woa.txt) tmp.nc $ncfile_out   # Vertical interpolation
+             rm tmp.nc
+          fi
           echo "${ncfile_out} SAVED"
        else
           echo "${ncfile_out} EXITS, SKIPP"
