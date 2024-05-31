@@ -59,7 +59,6 @@ do
           echo "${ncfile_out} EXITS, SKIPP"
        fi
     else
-#       echo "Can not find "$(basename $ncfile_in)
        echo "Can not find $ncfile_in"
     fi
 
