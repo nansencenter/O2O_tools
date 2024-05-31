@@ -33,4 +33,4 @@ ncfile.source = 'Generated using Python with netCDF4 and numpy'
 # Close the NetCDF file
 ncfile.close()
 
-print('target_grid.nc created successfully')
+print('target_grid_woa.nc created successfully')
