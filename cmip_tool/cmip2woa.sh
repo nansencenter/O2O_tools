@@ -26,7 +26,7 @@ case $model in
         MODEL=IPSL-CM6A-LR
         ENS=r1i1p1f1
         VER=latest
-        dlist_hst=(1850-2014 1850-1949 1950-2014)
+        dlist_hst=(1850-2014 1950-2014)
         dlist_ssp=(2015-2100)
 	;;
     CCCma)
@@ -50,14 +50,14 @@ case $model in
         MODEL=CNRM-ESM2-1
         ENS=r1i1p1f2
         VER=latest
-        dlist_hst=(1950-1999 2000-2014 1950-2014)
+        dlist_hst=(1950-1999 2000-2014 1850-2014)
         dlist_ssp=(2015-2064 2065-2100 2015-2100)
 	;;
     NCAR)
 	INSTITUTE=NCAR
         MODEL=CESM2
-        #ENS=r1i1p1f1
-        ENS=r4i1p1f1
+        #ENS=r4i1p1f1
+        ENS=r1i1p1f1
         VER=latest
         dlist_hst=(1850-2014)
         dlist_ssp=(2015-2064 2065-2100)
