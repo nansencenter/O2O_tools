@@ -2,9 +2,8 @@
 
 Run
 
-
-'''bash
-cmip2woa.sh
-'''
+```bash
+bash cmip2woa.sh
+```
 
 for usage of the script.
