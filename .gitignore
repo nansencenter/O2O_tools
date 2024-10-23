@@ -1,4 +1,8 @@
+cmip_tool.dev/
+woa23/
 data/
+data2/
+data_tw/
 *~
 *.nc
 .nfs*
