@@ -85,7 +85,7 @@ case $model in
         ENS=r4i1p1f1
         #ENS=r1i1p1f1
         VER=(latest)
-        GRID=(gn) # 500, 1500, 2500, 3500, 
+        GRID=(gn) # 500, 1500, 2500, 3500, in cm!
         dlist_hst=(1850-2014)
         dlist_ssp=(2015-2064 2065-2100)
 	;;
