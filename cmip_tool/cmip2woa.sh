@@ -47,8 +47,7 @@ case $model in
         VER=(latest)
         #VER=(v20190119 latest)
         GRID=(gn) # 0.50576, 1.555855, 2.667682, 3.85628
-	dlist_hst=(201001-201412)               # sliced files
-	#dlist_hst=(195001-196912 197001-198912 199001-200912 201001-201412)               # sliced files
+	dlist_hst=(195001-196912 197001-198912 199001-200912 201001-201412)               # sliced files
 	dlist_ssp=(201501-203412 203501-205412 205501-207412 207501-209412 209501-210012) # sliced files
         #dlist_hst=(1850-2014 1950-2014) # original file
         #dlist_ssp=(2015-2100)           # original file
