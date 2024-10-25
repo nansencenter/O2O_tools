@@ -20,7 +20,7 @@ case $model in
         VER=(latest)
         GRID=(gr) # 0, 5, 10 
         dlist_hst=(1950-1959 1960-1969 1970-1979 1980-1989 1990-1999 2000-2009 2010-2014)
-        dlist_ssp=(2015-2020 2021-2030 2031-2040 2041-2050 2051-2060 2061-2070 2081-2090 2091-2100)
+        dlist_ssp=(2015-2020 2021-2030 2031-2040 2041-2050 2051-2060 2061-2070 2071-2080 2081-2090 2091-2100)
 	;;
     GFDL)
 	INSTITUTE=NOAA-GFDL
@@ -47,7 +47,8 @@ case $model in
         VER=(latest)
         #VER=(v20190119 latest)
         GRID=(gn) # 0.50576, 1.555855, 2.667682, 3.85628
-	dlist_hst=(195001-196912 197001-198912 199001-200912 201001-201412)               # sliced files
+	dlist_hst=(201001-201412)               # sliced files
+	#dlist_hst=(195001-196912 197001-198912 199001-200912 201001-201412)               # sliced files
 	dlist_ssp=(201501-203412 203501-205412 205501-207412 207501-209412 209501-210012) # sliced files
         #dlist_hst=(1850-2014 1950-2014) # original file
         #dlist_ssp=(2015-2100)           # original file
@@ -106,17 +107,21 @@ esac
 
 #--
 
-DATDIR=$(dirname $PWD)/data_tw/${MODEL}/${EXP}
+DATDIR=$(dirname $PWD)/data/${MODEL}/${EXP}
 mkdir -p $DATDIR
 
 #-- IPSL file is too big, so sliced to smaller files first
 
-if [ "$mode" == "run" ]; then
-    if [ "$model" == "IPSL" ]; then
-       if [ !- d $DATDIR/sliced ]; then
+if [ "$model" == "IPSL" ]; then
+   if [ "$mode" == "run" ]; then
+       if [ ! -d $DATDIR/sliced ]; then
           bash slice_ipsl.sh
        fi
-    fi
+   elif [ "$mode" == "check" ]; then
+       if [ ! -d $DATDIR/sliced ]; then
+          echo "IPSL files are sliced to smaller chunks first."
+       fi
+   fi
 fi
     
 #--
@@ -126,7 +131,8 @@ target_hgrid=global_1 # This option is equivalent to WOA 1degx1deg grid
 target_zgrid=def_zgrid_woa.txt
 
 version_list=("${VER[@]}")
-var_list=(thetao so o2 no3)
+var_list=(thetao)
+#var_list=(thetao so o2 no3)
 #var_list=(dissic o2 o2sat no3 po4 thetao so mlotst agessc msftmz msftyz)
 grid_list=("${GRID[@]}")
 
@@ -205,7 +211,8 @@ do
                 if [ "$model" == "MPI" ]; then
 		   bash hinterp_mpi.sh $ncfile_in tmp.nc                  
                 elif [ "$model" == "IPSL" ]; then
-		   bash hinterp_ipsl.sh $ncfile_in tmp.nc $var
+		   bash ipsl.sh $ncfile_in tmp.nc $var
+		   #bash hinterp_ipsl.sh $ncfile_in tmp.nc $var
                 elif [ "$model" == "CCCma" ]; then
 		   bash hinterp_cccma.sh $ncfile_in tmp.nc 
                 elif [ "$model" == "CNRM" ]; then
