@@ -15,6 +15,6 @@ ncrename -v nav_lat,lat -v nav_lon,lon       tmp3.nc tmp4.nc
 ncatted -O -a coordinates,$var,m,c,"lat lon" tmp4.nc
 
 cdo remapbil,r360x180 -selindexbox,2,361,2,331 tmp5.nc $output >/dev/null 2>&1
-ncrename -d olevel,lev -v olevel,lev         $output
+#ncrename -d olevel,lev -v olevel,lev         $output  # this does not work for some reason.
 
 rm tmp0.nc tmp1.nc tmp2.nc tmp3.nc tmp4.nc
